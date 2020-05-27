@@ -1,20 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Bienvenu !{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #f5f5f5; padding: 2px 6px; }
+    #body{
+        height: calc(100vh - 8em);
+        padding: 4em;
+        color: rgba(255,255,255,.75);
+        font-family: 'Anonymous Pro', monospace;
+        background-color: rgb(25,25,25);
+    }
+    .line-1{
+        position: relative;
+        top: 50%;
+        width: 24em;
+        margin: 0 auto;
+        border-right: 2px solid rgba(255,255,255,.75);
+        font-size: 180%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        transform: translateY(-50%);
+    }
+
+    /* Animation */
+    .anim-typewriter{
+        animation: typewriter 1s steps(10) 1s 1 normal both,
+        blinkTextCursor 1s steps(2) infinite normal;
+    }
+    @keyframes typewriter{
+        from{width: 0;}
+        to{width: 8em;}
+    }
+    @keyframes blinkTextCursor{
+        from{border-right-color: rgba(255,255,255,.75);}
+        to{border-right-color: transparent;}
+    }
 </style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'R:/wamp/www/cesi/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'R:/wamp/www/cesi/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
+<div id="body">
+    <p class="line-1 anim-typewriter">Bienvenu</p>
 </div>
+
 {% endblock %}
