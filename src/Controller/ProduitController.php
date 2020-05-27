@@ -41,7 +41,7 @@ class ProduitController extends AbstractController
     /**
      * @Route("produits/search", name="produits_search")
      * @param Request $request
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function search(Request $request) {
         $search = $request->query->get("search");
