@@ -27,3 +27,8 @@ php bin/console make:migration
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
+Generate fake data
+
+```bash
+php bin/console doctrine:fixtures:load
+```
