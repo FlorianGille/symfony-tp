@@ -31,12 +31,12 @@
             </li>
             {% endif %}
         </ul>
-        <p class="mb-0 text-white mr-3" href="{{ path('app_login') }}">{{ app.user.email }}</p>
         <ul class="navbar-nav my-2 my-lg-0">
             {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
             <li class="nav-item">
             </li>
             {% else %}
+            <p class="mb-0 my-2 text-white mr-3">{{ app.user.email }}</p>
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
             </li>
