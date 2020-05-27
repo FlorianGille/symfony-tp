@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProduitController extends AbstractController
@@ -35,5 +36,23 @@ class ProduitController extends AbstractController
             'current_menu'=>'produits'
         ]);
 
+    }
+
+    /**
+     * @Route("produits/search", name="produits_search")
+     * @param Request $request
+     * @return void
+     */
+    public function search(Request $request) {
+        $search = $request->query->get("search");
+        if ($search != "") {
+            $produitRepository = $this->getDoctrine()->getRepository(produit::class);
+            $produits = $produitRepository->search($search);
+        }
+
+        return $this->render('produit/index.html.twig', [
+            'produits' => $produits,
+            //autres données
+        ]);
     }
 }
