@@ -23,8 +23,8 @@ class DefaultController extends AbstractController
      * @Route("/mail", name="mail")
      */
     public function mail(MailTestServices $email){
-        $produitrepo = $this->getDoctrine()->getRepository(produit::class);
-        $produit = $produitrepo->find(220);
+        $produitrepo = $this->getDoctrine()->getRepository(Produit::class);
+        $produit = $produitrepo->find(1);
         //envoi de mail
         $email->sendProduit($produit);
         return $this->redirectToRoute('produits');
