@@ -41,18 +41,16 @@ class ProduitController extends AbstractController
     /**
      * @Route("produits/search", name="produits_search")
      * @param Request $request
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function search(Request $request) {
         $search = $request->query->get("search");
-        if ($search != "") {
-            $produitRepository = $this->getDoctrine()->getRepository(produit::class);
-            $produits = $produitRepository->search($search);
-        }
+
+        $produitRepository = $this->getDoctrine()->getRepository(produit::class);
+        $produits = $produitRepository->search($search);
 
         return $this->render('produit/index.html.twig', [
             'produits' => $produits,
-            //autres données
         ]);
     }
 }
