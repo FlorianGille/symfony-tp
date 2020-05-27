@@ -1,0 +1,63 @@
+{% if formToShow == 'add' %}
+    {{ form_start(form ,{'method' : 'post','name' : 'produitAdd'}) }}
+{% else %}
+    {{ form_start(form ,{'method' : 'post','name' : 'produitEdit'}) }}
+{% endif %}
+
+        {{ form_errors(form) }}
+<div class="row">
+    <div class="col-md-4">
+        {{ form_label(form.titre) }}
+        {{ form_widget(form.titre) }}
+        {{ form_errors(form.titre) }}
+    </div>
+    <div class="col-md-4">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
+    </div>
+    <div class="col-md-4">
+        {{ form_label(form.prixTTC) }}
+        {{ form_widget(form.prixTTC) }}
+        {{ form_errors(form.prixTTC) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        {{ form_label(form.poids) }}
+        {{ form_widget(form.poids) }}
+        {{ form_errors(form.poids) }}
+    </div>
+    <div class="col-md-4">
+        {{ form_label(form.couleur) }}
+        {{ form_widget(form.couleur) }}
+        {{ form_errors(form.couleur) }}
+    </div>
+    <div class="col-md-4">
+        {{ form_label(form.stockQte) }}
+        {{ form_widget(form.stockQte) }}
+        {{ form_errors(form.stockQte) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        {{ form_label(form.actif) }}
+        {{ form_widget(form.actif) }}
+        {{ form_errors(form.actif) }}
+    </div>
+    <div class="col-md-4">
+        {{ form_label(form.dateCreation) }}
+        {{ form_widget(form.dateCreation) }}
+        {{ form_errors(form.dateCreation) }}
+    </div><div class="col-md-4">
+        {{ form_label(form.marque) }}
+        {{ form_widget(form.marque) }}
+        {{ form_errors(form.marque) }}
+    </div>
+</div>
+
+{{ form_rest(form) }}
+<button class="btn btn-primary">Valider</button>
+{{ form_end(form) }}

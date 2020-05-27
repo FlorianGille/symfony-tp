@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos produits en stock{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2> Nos produits en stock</h2>
+        <div class="row flex">
+            {% for produit in produits %}
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ path('produits_detail',{slug:produit.slug}) }}">{{ produit.titre }}</a>
+                            </h5>
+                            <p class="card-text">{{ produit.description }}</p>
+                            <p class="card-text">{{ produit.poids|number_format(1, ',', '.') }} Kgs</p>
+                            <div class="text-primary" style="font-weight: bold;font-size: 2rem">{{ produit.prixTTC | number_format(0,'',' ')}} € TTC</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
