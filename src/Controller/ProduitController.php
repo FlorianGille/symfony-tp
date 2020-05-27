@@ -45,14 +45,12 @@ class ProduitController extends AbstractController
      */
     public function search(Request $request) {
         $search = $request->query->get("search");
-        if ($search != "") {
-            $produitRepository = $this->getDoctrine()->getRepository(produit::class);
-            $produits = $produitRepository->search($search);
-        }
+
+        $produitRepository = $this->getDoctrine()->getRepository(produit::class);
+        $produits = $produitRepository->search($search);
 
         return $this->render('produit/index.html.twig', [
             'produits' => $produits,
-            //autres données
         ]);
     }
 }
