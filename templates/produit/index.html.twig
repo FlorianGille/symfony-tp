@@ -5,6 +5,12 @@
 {% block body %}
     <div class="container">
         <h2> Nos produits en stock</h2>
+        <form class="pull-right hidden" role="search" id="nav-search-form" method="get" action="{{ path('produits_search') }}">
+            <input name="search" type="text" class="form-control" id="search"  placeholder="Titre ou description" />
+            <button type="submit">Rechercher</button>
+        </form>
+
+        </a>
         <div class="row flex">
             {% for produit in produits %}
                 <div class="col-3">

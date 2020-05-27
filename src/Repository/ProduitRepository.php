@@ -58,5 +58,13 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function search($search) {
+        return $this->createQueryBuilder('p')
+            ->where('p.titre LIKE \'%'.$search.'%\'')
+            ->orWhere('p.description LIKE \'%'.$search.'%\'')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 }
