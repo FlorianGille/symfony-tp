@@ -17,3 +17,13 @@ composer install
 ```bash
 composer update
 ```
+
+Then, update your database
+
+```bash
+php bin/console make:migration
+```
+
+```bash
+php bin/console doctrine:migrations:migrate
+```
