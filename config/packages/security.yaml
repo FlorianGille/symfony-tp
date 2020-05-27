@@ -38,5 +38,5 @@ security:
     access_control:
         - { path: ^/admin/produits, roles: ROLE_PRODUIT }
         - { path: ^/admin/marques, roles: ROLE_MARQUE }
-    #role_hierarchy:
-    #    ROLE_ADMIN: ['ROLE_PRODUIT', 'ROLE_MARQUE']
+    role_hierarchy:
+        ROLE_ADMIN: ['ROLE_PRODUIT', 'ROLE_MARQUE']
