@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,14 +13,19 @@ class ProduitController extends AbstractController
     /**
      * @Route("/produits", name="produits")
      */
-    public function index()
+    public function index(Request $request,PaginatorInterface $paginator)
     {
         $produitRepository = $this->getDoctrine()->getRepository(produit::class);
-        $produits = $produitRepository->findBy(['actif'=>true]);
+        $donnees = $produitRepository->findBy(['actif'=>true]);
+
+        $produits = $paginator->paginate(
+            $donnees,
+            $request->query->getInt('page', 1),
+            20
+        );
 
         return $this->render('produit/index.html.twig', [
             'produits' => $produits,
-            //autres données
         ]);
     }
 
@@ -43,11 +49,17 @@ class ProduitController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function search(Request $request) {
+    public function search(Request $request,PaginatorInterface $paginator) {
         $search = $request->query->get("search");
 
         $produitRepository = $this->getDoctrine()->getRepository(produit::class);
-        $produits = $produitRepository->search($search);
+        $donnees = $produitRepository->search($search);
+
+        $produits = $paginator->paginate(
+            $donnees,
+            $request->query->getInt('page', 1),
+            20
+        );
 
         return $this->render('produit/index.html.twig', [
             'produits' => $produits,
