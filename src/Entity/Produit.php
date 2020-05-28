@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -72,10 +74,16 @@ class Produit
      */
     private $marque;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProduitsMagasins::class, mappedBy="produit", orphanRemoval=true)
+     */
+    private $produitsMagasins;
+
     public function __construct()
     {
         $this->actif = false;
         $this->dateCreation = new \DateTime();
+        $this->produitsMagasins = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -205,6 +213,37 @@ class Produit
     public function setMarque(?Marque $marque): self
     {
         $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProduitsMagasins[]
+     */
+    public function getProduitsMagasins(): Collection
+    {
+        return $this->produitsMagasins;
+    }
+
+    public function addProduitsMagasin(ProduitsMagasins $produitsMagasin): self
+    {
+        if (!$this->produitsMagasins->contains($produitsMagasin)) {
+            $this->produitsMagasins[] = $produitsMagasin;
+            $produitsMagasin->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduitsMagasin(ProduitsMagasins $produitsMagasin): self
+    {
+        if ($this->produitsMagasins->contains($produitsMagasin)) {
+            $this->produitsMagasins->removeElement($produitsMagasin);
+            // set the owning side to null (unless already changed)
+            if ($produitsMagasin->getProduit() === $this) {
+                $produitsMagasin->setProduit(null);
+            }
+        }
 
         return $this;
     }

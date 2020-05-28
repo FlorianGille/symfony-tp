@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos produits en stock{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Gérer le stock des Produits</h1>
+        {{ form_start(form ,{'method' : 'post','name' : 'produitStock'}) }}
+
+        {{ form_errors(form) }}
+        <div class="row">
+            <div class="col">
+                {{ form_label(form.produit) }}
+                {{ form_widget(form.produit) }}
+                {{ form_errors(form.produit) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form_label(form.magasin) }}
+                {{ form_widget(form.magasin) }}
+                {{ form_errors(form.magasin) }}
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        <button class="btn btn-primary">Valider</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
