@@ -24,4 +24,15 @@ class MailTestServices{
         $this->mailer->send($message);
     }
 
+    public function contactUs(string $content, string $produit) {
+        $message = (new \Swift_Message('Mail Automatique'))
+            ->setFrom('paul.godard@viacesi.fr')
+            ->setTo('mollet.simon.pro@gmail.com')
+            ->setReplyTo('paul.godard@viacesi.fr')
+            ->setBody($this->render->render('mail.html.twig',[
+                'content' => $content,
+                'produit' => $produit
+            ]));
+        $this->mailer->send($message);
+    }
 }

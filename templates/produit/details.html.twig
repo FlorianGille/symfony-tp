@@ -3,16 +3,20 @@
     <div class="container">
         <div class="jumbotron">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
+                <form action="{{ path('send_mail')}}" method="get">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <textarea name="mail" id="" cols="30" rows="10" class="form-control" placeholder="Votre mail ici.."></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="hidden" value="{{ produit.titre }}" name="produit">
+                            <h1>{{ produit.titre }}</h1>
+                            <h2>{{ produit.stockQte }} pièces - {{ produit.poids }} Kg</h2>
+                            <div class="text-primary" style="font-size: 4rem;font-weight: bold;">{{ produit.prixTTC | number_format(0,'',' ') }} €</div>
+                            <button type="submit" class="btn btn-success">Contactez-nous !</button>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <h1>{{ produit.titre }}</h1>
-                        <h2>{{ produit.stockQte }} pièces - {{ produit.poids }} Kg</h2>
-                        <div class="text-primary" style="font-size: 4rem;font-weight: bold;">{{ produit.prixTTC | number_format(0,'',' ') }} €</div>
-                        <a href="#" class="btn btn-primary">Contactez nous</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="container mt-4">
