@@ -24,29 +24,30 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         {{ form_label(form.poids) }}
         {{ form_widget(form.poids) }}
         {{ form_errors(form.poids) }}
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         {{ form_label(form.couleur) }}
         {{ form_widget(form.couleur) }}
         {{ form_errors(form.couleur) }}
     </div>
-</div>
-
-<div class="row">
     <div class="col-md-4">
         {{ form_label(form.actif) }}
         {{ form_widget(form.actif) }}
         {{ form_errors(form.actif) }}
     </div>
-    <div class="col-md-4">
+</div>
+
+<div class="row">
+    <div class="col-md-6">
         {{ form_label(form.dateCreation) }}
         {{ form_widget(form.dateCreation) }}
         {{ form_errors(form.dateCreation) }}
-    </div><div class="col-md-4">
+    </div>
+    <div class="col-md-6">
         {{ form_label(form.marque) }}
         {{ form_widget(form.marque) }}
         {{ form_errors(form.marque) }}

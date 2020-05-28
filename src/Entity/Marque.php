@@ -25,7 +25,7 @@ class Marque
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=produit::class, mappedBy="marque")
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="marque")
      */
     private $produit;
 
