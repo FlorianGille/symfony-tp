@@ -7,6 +7,7 @@ use App\Entity\Produit;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,7 +27,9 @@ class ProduitEditType extends AbstractType
                     "Noir"=>3,
                     "Rouge"=>4]
             ])
-            ->add('dateCreation')
+            ->add('dateCreation',DateType::class,[
+                'widget'=> 'single_text',
+            ])
             ->add('stockQte')
             ->add('actif')
             ->add('marque', EntityType::class,[
