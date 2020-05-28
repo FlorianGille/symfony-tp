@@ -49,17 +49,4 @@ class ProduitsMagasinsRepository extends ServiceEntityRepository
         ;
     }
     */
-
-    public function findOneByProduitAndMagasin(Produit $produit, Magasin $magasin): ?ProduitsMagasins
-    {
-        return $this->createQueryBuilder('pm')
-            ->where('p.produit_id = :produitId')
-            ->andWhere('p.magasin_id = :magasinId')
-            ->setParameter('produitId', $produit.getId())
-            ->setParameter('magasinId', $magasin.getId())
-            ->getQuery()
-            ->getOne()
-        ;
-    }
-
 }
