@@ -57,7 +57,17 @@
         {{ form_errors(form.marque) }}
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12  {{ form_errors(form.imagefile)|length > 4 ? 'has-error' : '' }}">
+        {{ form_label(form.imagefile, null, {'label_attr': {'class': 'classLabelRequired'}}) }}
+        {{ form_widget(form.imagefile, {'attr': {
+            'class': 'form-control'
+        }}) }}
+        {{ form_errors(form.imagefile) }}
+    </div>
+</div>
+
 
 {{ form_rest(form) }}
-<button class="btn btn-primary">Valider</button>
+    <button class="btn btn-primary">Valider</button>
 {{ form_end(form) }}
