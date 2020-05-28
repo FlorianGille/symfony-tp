@@ -30,7 +30,6 @@ class ProduitEditType extends AbstractType
             ->add('dateCreation',DateType::class,[
                 'widget'=> 'single_text',
             ])
-            ->add('stockQte')
             ->add('actif')
             ->add('marque', EntityType::class,[
                 'choice_label'=> 'nom',

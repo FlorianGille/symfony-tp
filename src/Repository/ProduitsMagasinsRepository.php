@@ -21,32 +21,15 @@ class ProduitsMagasinsRepository extends ServiceEntityRepository
         parent::__construct($registry, ProduitsMagasins::class);
     }
 
-    // /**
-    //  * @return ProduitsMagasins[] Returns an array of ProduitsMagasins objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function shortStock($nb)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('pm')
+            ->innerJoin('pm.produit', 'p')
+            ->where('pm.stockQte <= :val')
+            ->andWhere('p.actif = :actif')
+            ->setParameter('val', $nb)
+            ->setParameter('actif', true)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?ProduitsMagasins
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

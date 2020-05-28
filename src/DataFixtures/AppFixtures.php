@@ -65,7 +65,6 @@ class AppFixtures extends Fixture
             ->setPoids($faker->randomFloat(2,2,500))
             ->setPrixTTC($faker->randomNumber(4))
             ->setActif($faker->randomElement([true,false]))
-            ->setStockQte($faker->randomNumber(2))
             ->setMarque($marqueArray[0]);
 
             $manager->persist($produit);
