@@ -13,6 +13,9 @@ class ProduitController extends AbstractController
 {
     /**
      * @Route("/produits", name="produits")
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request,PaginatorInterface $paginator)
     {
@@ -33,7 +36,7 @@ class ProduitController extends AbstractController
 
     /**
      * @Route("/produits/details/{slug}", name="produits_detail", requirements={"slug" : "[a-zA-Z0-9\-]*"})
-     * @param $slug
+     * @param Produit $produit
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function detail(Produit $produit){
@@ -48,6 +51,7 @@ class ProduitController extends AbstractController
     /**
      * @Route("produits/search", name="produits_search")
      * @param Request $request
+     * @param PaginatorInterface $paginator
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function search(Request $request,PaginatorInterface $paginator) {
@@ -67,13 +71,24 @@ class ProduitController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("produits/contact", name="send_mail")
+     * @param Request $request
+     * @param MailTestServices $mail
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function contactUs(Request $request, MailTestServices $mail) {
+    public function contactUs(Request $request, MailTestServices $mail)
+    {
         $content = $request->query->get("mail");
         $produit = $request->query->get("produit");
         $mail->contactUs($content, $produit);
         return $this->redirectToRoute('produits');
+    }
+
+    public function lowStock(MailTestServices $mail) {
+        $produitRepo = $this->getDoctrine()->getRepository(Produit::class);
+        $produits = $produitRepo->shortStock(10);
+        $mail->lowStock($produits);
     }
 }

@@ -35,4 +35,15 @@ class MailTestServices{
             ]));
         $this->mailer->send($message);
     }
+
+    public function lowStock($produits) {
+        $message = (new \Swift_Message('Mail Automatique'))
+            ->setFrom('paul.godard@viacesi.fr')
+            ->setTo('paul.godard@viacesi.fr')
+            ->setReplyTo('paul.godard@viacesi.fr')
+            ->setBody($this->render->render('mail/lowStock.html.twig',[
+                'produits' => $produits
+            ]));
+        $this->mailer->send($message);
+    }
 }

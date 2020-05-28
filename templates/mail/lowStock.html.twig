@@ -1,0 +1,7 @@
+<html>
+    <h1>Hello ! Les produits suivants ne sont maintenant disponibles qu'en moins de 11 exemplaires, aie aie aie vous devriez penser à réapprovisionner le stock</h1>
+    {% for produit in produits %}
+        <p>{{ produit.stockQte }}</p>
+        <p>{{ produit.titre }}</p>
+    {% endfor %}
+</html>
