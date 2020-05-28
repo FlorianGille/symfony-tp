@@ -82,6 +82,7 @@ class ProduitController extends AbstractController
                 $em->persist($produitsMagasins);
             }
             $em->flush();
+            return $this->redirectToRoute('admin_produit');
         }
 
         return $this->render('admin/produit/stock.html.twig', [
