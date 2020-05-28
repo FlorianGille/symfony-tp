@@ -20,7 +20,7 @@ class ProduitController extends AbstractController
      */
     public function index(Request $request,PaginatorInterface $paginator)
     {
-        $produitRepository = $this->getDoctrine()->getRepository(produit::class);
+        $produitRepository = $this->getDoctrine()->getRepository(Produit::class);
         $donnees = $produitRepository->findBy(['actif'=>true]);
 
         $produits = $paginator->paginate(
