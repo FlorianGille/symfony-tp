@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             {% if produit.filename %}
-                                <img src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('medium') }}" style="max-height: 300px;"/>
+                                <img src="{{ vich_uploader_asset(produit, 'imageFile') | imagine_filter('medium') }}" style="max-height: 450px; max-width: 667px;"/>
                             {% endif %}
 
                             <textarea name="mail" id="" cols="30" rows="10" class="form-control" placeholder="Votre mail ici.."></textarea>
