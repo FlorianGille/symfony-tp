@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\ProduitsMagasins;
 use App\Service\MailTestServices;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,10 +41,9 @@ class ProduitController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function detail(Produit $produit){
-
         return $this->render('produit/details.html.twig',[
-            'produit'=>$produit,
-            'current_menu'=>'produits'
+            'produit' => $produit,
+            'current_menu' => 'produits'
         ]);
 
     }
@@ -87,8 +87,8 @@ class ProduitController extends AbstractController
     }
 
     public function lowStock(MailTestServices $mail) {
-        $produitRepo = $this->getDoctrine()->getRepository(Produit::class);
-        $produits = $produitRepo->shortStock(10);
-        $mail->lowStock($produits);
+        $produitsMagasinsRepo = $this->getDoctrine()->getRepository(ProduitsMagasins::class);
+        $produitsMagasins = $produitsMagasinsRepo->shortStock(10);
+        $mail->lowStock($produitsMagasins);
     }
 }

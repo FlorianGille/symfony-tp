@@ -63,12 +63,6 @@ class Produit
     private $dateCreation;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\Range(min="3",max="100", notInRangeMessage="Attentoin il faut ça soit entre {{ min }} et {{ max }} et vous avez selectionner {{ value }}")
-     */
-    private $stockQte;
-
-    /**
      * @ORM\Column(type="boolean", options={"default":false})
      */
     private $actif;
@@ -269,18 +263,6 @@ class Produit
     public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
-
-        return $this;
-    }
-
-    public function getStockQte(): ?int
-    {
-        return $this->stockQte;
-    }
-
-    public function setStockQte(int $stockQte): self
-    {
-        $this->stockQte = $stockQte;
 
         return $this;
     }

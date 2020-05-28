@@ -29,7 +29,6 @@ class ProduitController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route  ("/admin/produit/add", name="admin.produit.add")
      */
@@ -63,9 +62,27 @@ class ProduitController extends AbstractController
         //si on a une requete et que le form et valide on flush
         if($form->isSubmitted() && $form->isValid()){
             $em = $this->getDoctrine()->getManager();
-            // $produitsMagasins = $em->getRepository(ProduitsMagasins::class)->findOneByProduitAndMagasin($request->request->get('produit'), $request->request->get('produit'));
-            // dd($produitsMagasins);
+
+            // get submitted values
+            $produit = $form->get('produit')->getNormData();
+            $magasin = $form->get('magasin')->getNormData();
+            $stockQte = $form->get('stockQte')->getViewData();
+
+            // update data
+            $produitsMagasinsRepo = $em->getRepository(ProduitsMagasins::class);
+            $produitsMagasins = $produitsMagasinsRepo->findOneBy(['produit' => $produit->getId(), 'magasin' => $magasin->getId()]);
+
+            if ($produitsMagasins != null) {
+                $produitsMagasins->setStockQte($stockQte);
+            } else {
+                $produitsMagasins = new ProduitsMagasins();
+                $produitsMagasins->setProduit($produit);
+                $produitsMagasins->setMagasin($magasin);
+                $produitsMagasins->setStockQte($stockQte);
+                $em->persist($produitsMagasins);
+            }
             $em->flush();
+            return $this->redirectToRoute('admin_produit');
         }
 
         return $this->render('admin/produit/stock.html.twig', [

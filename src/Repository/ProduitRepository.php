@@ -47,16 +47,6 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function shortStock($nb)
-    {
-        return $this->createQueryBuilder('p')
-            ->where('p.stockQte <= :val')
-            ->andWhere('p.actif = :actif')
-            ->setParameter('val', $nb)
-            ->setParameter('actif', true)
-            ->getQuery()
-            ->getResult();
-    }
 
     public function search($search) {
         return $this->createQueryBuilder('p')

@@ -21,45 +21,15 @@ class ProduitsMagasinsRepository extends ServiceEntityRepository
         parent::__construct($registry, ProduitsMagasins::class);
     }
 
-    // /**
-    //  * @return ProduitsMagasins[] Returns an array of ProduitsMagasins objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?ProduitsMagasins
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-
-    public function findOneByProduitAndMagasin(Produit $produit, Magasin $magasin): ?ProduitsMagasins
+    public function shortStock($nb)
     {
         return $this->createQueryBuilder('pm')
-            ->where('p.produit_id = :produitId')
-            ->andWhere('p.magasin_id = :magasinId')
-            ->setParameter('produitId', $produit.getId())
-            ->setParameter('magasinId', $magasin.getId())
+            ->innerJoin('pm.produit', 'p')
+            ->where('pm.stockQte <= :val')
+            ->andWhere('p.actif = :actif')
+            ->setParameter('val', $nb)
+            ->setParameter('actif', true)
             ->getQuery()
-            ->getOne()
-        ;
+            ->getResult();
     }
-
 }
