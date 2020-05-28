@@ -62,6 +62,7 @@ class ProduitRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->where('p.titre LIKE \'%'.$search.'%\'')
             ->orWhere('p.description LIKE \'%'.$search.'%\'')
+            ->andWhere('p.actif = true')
             ->getQuery()
             ->getResult();
     }

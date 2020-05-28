@@ -20,3 +20,5 @@
 /src/Migrations
 .idea/workspace.xml
 composer.lock
+
+.env

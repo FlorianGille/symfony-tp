@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Service\MailTestServices;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,5 +65,15 @@ class ProduitController extends AbstractController
         return $this->render('produit/index.html.twig', [
             'produits' => $produits,
         ]);
+    }
+
+    /**
+     * @Route("produits/contact", name="send_mail")
+     */
+    public function contactUs(Request $request, MailTestServices $mail) {
+        $content = $request->query->get("mail");
+        $produit = $request->query->get("produit");
+        $mail->contactUs($content, $produit);
+        return $this->redirectToRoute('produits');
     }
 }
