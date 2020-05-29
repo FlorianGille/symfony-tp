@@ -105,9 +105,13 @@ class ProduitController extends AbstractController
 
 
     /**
-     * @Route("/admin/produit/delete/{id}", name="admin.produit.delete", methods="DELETE")
+     * @Route("/admin/produit/delete/{id}", name="admin.produit.delete")
      */
-    public function delete(){
+    public function delete(Produit $produit){
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($produit);
+        $em->flush();
+
         return $this->redirectToRoute('admin_produit');
     }
 }

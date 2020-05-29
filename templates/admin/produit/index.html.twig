@@ -17,6 +17,7 @@
                     <td>{{ produit.titre }}</td>
                     <td>
                         <a href="{{ path('admin.produit.edit', {id: produit.id}) }}" class="btn btn-secondary">Editer</a>
+                        <a href="{{ path('admin.produit.delete', {id: produit.id}) }}" class="btn btn-danger">Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}
