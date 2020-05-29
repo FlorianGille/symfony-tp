@@ -45,7 +45,24 @@ class ProduitController extends AbstractController
             'produit' => $produit,
             'current_menu' => 'produits'
         ]);
+    }
 
+
+    /**
+     * @Route("produits/marque/{nom}", name="produit_marque")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function marque(Request $request, PaginatorInterface $paginator, $nom) {
+        $produitRepository = $this->getDoctrine()->getRepository(Produit::class);
+        $produits = $produitRepository->findAllActivesByMarqueNom($nom);
+        $produits = $paginator->paginate(
+            $produits,
+            $request->query->getInt('page', 1),
+            20
+        );
+        return $this->render('produit/index.html.twig', [
+            'produits' => $produits
+        ]);
     }
 
     /**
@@ -57,7 +74,7 @@ class ProduitController extends AbstractController
     public function search(Request $request,PaginatorInterface $paginator) {
         $search = $request->query->get("search");
 
-        $produitRepository = $this->getDoctrine()->getRepository(produit::class);
+        $produitRepository = $this->getDoctrine()->getRepository(Produit::class);
         $donnees = $produitRepository->search($search);
 
         $produits = $paginator->paginate(

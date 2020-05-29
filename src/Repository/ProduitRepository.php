@@ -48,6 +48,18 @@ class ProduitRepository extends ServiceEntityRepository
     }
     */
 
+    public function findAllActivesByMarqueNom($nom)
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.marque', 'm')
+            ->where('m.nom = :nom')
+            ->andWhere('p.actif = true')
+            ->setParameter('nom', $nom)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function search($search) {
         return $this->createQueryBuilder('p')
             ->where('p.titre LIKE \'%'.$search.'%\'')
