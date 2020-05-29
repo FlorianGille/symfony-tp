@@ -25,4 +25,5 @@ composer.lock
 .env
 ###> liip/imagine-bundle ###
 /public/media/cache/
+/public/images/
 ###< liip/imagine-bundle ###
